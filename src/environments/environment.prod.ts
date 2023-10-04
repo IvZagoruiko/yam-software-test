@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  baseBEUrl: 'https://fakestoreapi.com',
+  httpRequestTimeout: 60_000,
 };

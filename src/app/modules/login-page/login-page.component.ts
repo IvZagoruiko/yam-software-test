@@ -4,8 +4,9 @@ import { takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BaseDestroyClass } from '@core/classes/base-destroy.class';
 import { authResetStatusAction, fetchLoginAction } from '@store/actions/auth.action';
-import { selectAuthRequestIsPending, selectAuthRequestStatus } from '@store/selectors/auth.selector';
+import { selectAuthRequestData } from '@store/selectors/auth.selector';
 import { IRootState } from '@store/interfaces/root-state.interface';
+import { IRootStateAuthRequestData } from '@store/interfaces/root-state-auth.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -15,8 +16,8 @@ import { IRootState } from '@store/interfaces/root-state.interface';
 export class LoginPageComponent extends BaseDestroyClass implements OnInit {
   form: FormGroup;
 
+  isPending = false;
   private _status: number;
-  private _isPending = false;
 
   get usernameError(): string {
     const control = this.form?.get('username');
@@ -57,7 +58,7 @@ export class LoginPageComponent extends BaseDestroyClass implements OnInit {
   }
 
   get disabledLogIn(): boolean {
-    return !this.form?.valid || this._isPending;
+    return !this.form?.valid || this.isPending || this._status === 200;
   }
 
   constructor(
@@ -73,7 +74,7 @@ export class LoginPageComponent extends BaseDestroyClass implements OnInit {
   }
 
   logIn(): void {
-    this._isPending = true;
+    this.isPending = true;
     this._store.dispatch(fetchLoginAction({payload: this.form.value}));
   }
 
@@ -93,20 +94,13 @@ export class LoginPageComponent extends BaseDestroyClass implements OnInit {
   }
 
   private _storeSubscribe(): void {
-    this._store.select(selectAuthRequestStatus)
+    this._store.select(selectAuthRequestData)
       .pipe(
         takeUntil(this._onDestroy$),
       )
-      .subscribe((status: number): void => {
-        this._status = status;
-      });
-
-    this._store.select(selectAuthRequestIsPending)
-      .pipe(
-        takeUntil(this._onDestroy$),
-      )
-      .subscribe((isPending: boolean): void => {
-        this._isPending = isPending;
+      .subscribe((requestData: IRootStateAuthRequestData): void => {
+        this._status = requestData.status;
+        this.isPending = requestData.isPending;
       });
   }
 }

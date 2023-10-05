@@ -1,6 +1,10 @@
 export interface IRootStateAuth {
   token: string;
   userName: string;
-  requestStatus: number;
-  requestIsPending: boolean;
+  requestData: IRootStateAuthRequestData;
+}
+
+export interface IRootStateAuthRequestData {
+  status: number;
+  isPending: boolean;
 }

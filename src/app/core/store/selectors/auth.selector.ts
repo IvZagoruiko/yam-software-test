@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { IRootState } from '../interfaces/root-state.interface';
-import { IRootStateAuth } from '../interfaces/root-state-auth.interface';
+import { IRootStateAuth, IRootStateAuthRequestData } from '../interfaces/root-state-auth.interface';
 
 const selectAuth = (state: IRootState): IRootStateAuth => state.auth;
 
@@ -14,12 +14,7 @@ export const selectAuthUserName = createSelector(
   (state: IRootStateAuth): string => state.userName,
 );
 
-export const selectAuthRequestStatus = createSelector(
+export const selectAuthRequestData = createSelector(
   selectAuth,
-  (state: IRootStateAuth): number => state.requestStatus,
-);
-
-export const selectAuthRequestIsPending = createSelector(
-  selectAuth,
-  (state: IRootStateAuth): boolean => state.requestIsPending,
+  (state: IRootStateAuth): IRootStateAuthRequestData => state.requestData,
 );

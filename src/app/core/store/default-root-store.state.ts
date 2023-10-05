@@ -4,7 +4,9 @@ export const defaultRootStoreState: IRootState = {
   auth: {
     token: null,
     userName: null,
-    requestStatus: null,
-    requestIsPending: false,
+    requestData: {
+      status: null,
+      isPending: false,
+    }
   },
 };

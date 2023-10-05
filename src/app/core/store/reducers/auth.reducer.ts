@@ -17,23 +17,32 @@ const authInitFromLocalStorage = (state: IRootStateAuth, action: IAction<IRootSt
   return {
     ...state,
     ...action.payload,
-    requestStatus: null,
-    requestIsPending: false,
+    requestData: {
+      status: null,
+      isPending: false,
+    },
   };
 };
 
 const fetchLogin = (state: IRootStateAuth): IRootStateAuth => {
   return {
     ...state,
-    requestIsPending: true,
+    requestData: {
+      status: null,
+      isPending: true,
+    },
   };
 };
 
 const fillResolveLogin = (state: IRootStateAuth, action: IAction<IFillResolveLoginActonPayload>): IRootStateAuth => {
   return {
     ...state,
-    ...action.payload,
-    requestIsPending: false,
+    token: action.payload.token,
+    userName: action.payload.userName,
+    requestData: {
+      status: action.payload.requestStatus,
+      isPending: false,
+    },
   };
 };
 
@@ -42,8 +51,10 @@ const fillRejectLogin = (state: IRootStateAuth, action: IAction<IFillRejectLogin
     ...state,
     token: null,
     userName: null,
-    requestStatus: action.payload.requestStatus,
-    requestIsPending: false,
+    requestData: {
+      status: action.payload.requestStatus,
+      isPending: false,
+    },
   };
 };
 
@@ -57,7 +68,10 @@ const logout = (state: IRootStateAuth): IRootStateAuth => {
 const authResetStatus = (state: IRootStateAuth): IRootStateAuth => {
   return {
     ...state,
-    requestStatus: null,
+    requestData: {
+      ...state.requestData,
+      status: null,
+    },
   };
 };
 

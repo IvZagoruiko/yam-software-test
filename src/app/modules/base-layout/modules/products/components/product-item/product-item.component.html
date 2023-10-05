@@ -1,0 +1,13 @@
+<div class="w-full h-84 flex flex-col justify-center p-4 border rounded-2xl">
+  <div *ngIf="!product; else ProductInitiated" class="h-full flex justify-center items-center">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <ng-template #ProductInitiated>
+    <div class="h-52 bg-contain bg-no-repeat bg-center" [ngStyle]="backgroundImageStyle"></div>
+
+    <div class="mt-3 h-10 font-medium text-center">{{ product.title }}</div>
+
+    <button mat-button class="mt-2 self-end bg-green-600 text-gray-700">In Cart</button>
+  </ng-template>
+</div>

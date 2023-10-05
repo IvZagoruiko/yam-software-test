@@ -1,0 +1,27 @@
+<div class="h-full flex justify-center items-center">
+  <form class="p-6 w-64 flex flex-col items-center border shadow-2xl rounded-2xl" [formGroup]="form" (ngSubmit)="logIn()">
+    <div>Log In</div>
+
+    <div class="my-4 flex flex-col">
+      <mat-form-field>
+        <input matInput placeholder="User Name" formControlName="username">
+        <mat-error>{{ usernameError }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="mt-2">
+        <input matInput placeholder="Password" formControlName="password">
+        <mat-error>{{ passwordError }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="showStatusError" class="mb-4 w-full p-4 flex justify-center items-center bg-red-300 text-red-600 text-center rounded-2xl">
+      <span *ngIf="incorrectDataError; else otherErrors">Incorrect username or password</span>
+
+      <ng-template #otherErrors>
+        <span>Error, try later</span>
+      </ng-template>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="disabledLogIn">Log In</button>
+  </form>
+</div>

@@ -1,9 +1,10 @@
 import { IRootState } from './interfaces/root-state.interface';
 
-export const defaultStoreState: IRootState = {
+export const defaultRootStoreState: IRootState = {
   auth: {
     token: null,
     userName: null,
-    status: null,
+    requestStatus: null,
+    requestIsPending: false,
   },
 };

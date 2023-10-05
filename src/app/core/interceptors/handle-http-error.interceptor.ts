@@ -3,14 +3,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, throwError, timeout } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HTTP_REQUEST_TIMEOUT } from '../../app.tokens';
+import { HTTP_REQUEST_TIMEOUT_TOKEN } from '../../app.tokens';
 
 @Injectable()
 export class HandleHttpErrorInterceptor implements HttpInterceptor {
 
   constructor(
     private readonly _snackbar: MatSnackBar,
-    @Inject(HTTP_REQUEST_TIMEOUT) private readonly _httpRequestTimeout: number,
+    @Inject(HTTP_REQUEST_TIMEOUT_TOKEN) private readonly _httpRequestTimeout: number,
   ) {
   }
 

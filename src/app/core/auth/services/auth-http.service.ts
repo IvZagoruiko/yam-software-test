@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpBackend, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { filter, Observable, timeout } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BASE_BE_URL, HTTP_REQUEST_TIMEOUT } from '../../../app.tokens';
-import { IFetchLoginActionPayload } from '../../store/actions/auth.action';
+import { IFetchLoginActionPayload } from '@store/actions/auth.action';
+import { BASE_BE_URL_TOKEN, HTTP_REQUEST_TIMEOUT_TOKEN } from '../../../app.tokens';
 import { ILoginResponse } from '../interfaces/login-response.interface';
 
 @Injectable()
@@ -11,8 +11,8 @@ export class AuthHttpService {
 
   constructor(
     private readonly _httpBackend: HttpBackend,
-    @Inject(BASE_BE_URL) private readonly _baseUrl: string,
-    @Inject(HTTP_REQUEST_TIMEOUT) private readonly _httpRequestTimeout: number,
+    @Inject(BASE_BE_URL_TOKEN) private readonly _baseUrl: string,
+    @Inject(HTTP_REQUEST_TIMEOUT_TOKEN) private readonly _httpRequestTimeout: number,
   ) {
   }
 

@@ -1,0 +1,20 @@
+<div class="h-16 px-4 py-2 shadow-lg flex items-center">
+  <div class="ml-auto flex items-center">
+    <button mat-button class="flex items-center bg-green-600">
+      <mat-icon class="text-gray-700">shopping_cart_outline</mat-icon>
+      <span class="ml-2 text-gray-700">Cart</span>
+    </button>
+
+    <button mat-button class="ml-6 flex items-center" [matMenuTriggerFor]="userActions">
+      <mat-icon>person_outline</mat-icon>
+      <span class="ml-2 text-base font-medium">{{ userName$ | async }}</span>
+    </button>
+  </div>
+
+  <mat-menu [xPosition]="'before'" #userActions="matMenu">
+    <button mat-menu-item class="flex items-center" (click)="logOut()">
+      <mat-icon class="mr-0 text-base">logout</mat-icon>
+      <span class="ml-1 leading-6">Log Out</span>
+    </button>
+  </mat-menu>
+</div>

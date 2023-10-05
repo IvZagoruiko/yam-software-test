@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { RootStoreModule } from './store/root-store.module';
+import { AuthorizedGuard } from '@core/auth/guards/authorized.guard';
+import { NotAuthorizedGuard } from '@core/auth/guards/not-authorized.guard';
+import { RootStoreModule } from '@store/root-store.module';
 import { AuthHttpService } from './auth/services/auth-http.service';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { HandleHttpErrorInterceptor } from './interceptors/handle-http-error.interceptor';
@@ -10,8 +11,6 @@ import { HandleHttpErrorInterceptor } from './interceptors/handle-http-error.int
 @NgModule({
   declarations: [],
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     RootStoreModule,
 
@@ -19,6 +18,10 @@ import { HandleHttpErrorInterceptor } from './interceptors/handle-http-error.int
   ],
   providers: [
     AuthHttpService,
+
+    AuthorizedGuard,
+    NotAuthorizedGuard,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

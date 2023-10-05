@@ -29,20 +29,25 @@ export const fetchLoginAction = createAction(
   props<{ payload: IFetchLoginActionPayload }>(),
 );
 
+export interface IFillResolveLoginActonPayload {
+  token: string;
+  userName: string;
+  requestStatus: number;
+}
 export const fillResolveLoginAction = createAction(
   AUTH_ACTIONS.LOGIN.FILL.RESOLVE,
-  props<{ payload: IRootStateAuth }>(),
+  props<{ payload: IFillResolveLoginActonPayload }>(),
 );
 
 export interface IFillRejectLoginActionPayload {
-  status: number;
+  requestStatus: number;
 }
 export const fillRejectLoginAction = createAction(
   AUTH_ACTIONS.LOGIN.FILL.REJECT,
   props<{ payload: IFillRejectLoginActionPayload }>(),
 );
 
-export const fillLogoutAction = createAction(
+export const logoutAction = createAction(
   AUTH_ACTIONS.LOGOUT,
 );
 

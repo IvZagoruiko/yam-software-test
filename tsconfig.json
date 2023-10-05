@@ -2,7 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true,
@@ -27,7 +27,10 @@
       ],
       "@store/*": [
         "app/core/store/*",
-      ]
+      ],
+      "@shared/*": [
+        "app/shared/*",
+      ],
     },
   },
   "angularCompilerOptions": {

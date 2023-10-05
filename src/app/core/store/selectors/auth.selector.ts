@@ -14,7 +14,12 @@ export const selectAuthUserName = createSelector(
   (state: IRootStateAuth): string => state.userName,
 );
 
-export const selectAuthStatus = createSelector(
+export const selectAuthRequestStatus = createSelector(
   selectAuth,
-  (state: IRootStateAuth): number => state.status,
+  (state: IRootStateAuth): number => state.requestStatus,
+);
+
+export const selectAuthRequestIsPending = createSelector(
+  selectAuth,
+  (state: IRootStateAuth): boolean => state.requestIsPending,
 );

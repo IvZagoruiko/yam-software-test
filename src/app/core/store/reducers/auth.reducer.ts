@@ -1,12 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
-import { defaultStoreState } from '../default-store.state';
+import { defaultRootStoreState } from '../default-root-store.state';
 import {
   authInitFromLocalStorageAction,
   authResetStatusAction,
-  fillLogoutAction,
+  fetchLoginAction,
   fillRejectLoginAction,
   fillResolveLoginAction,
   IFillRejectLoginActionPayload,
+  IFillResolveLoginActonPayload,
+  logoutAction,
 } from '../actions/auth.action';
 import { IAction } from '../interfaces/action.interface';
 import { IRootStateAuth } from '../interfaces/root-state-auth.interface';
@@ -15,14 +17,23 @@ const authInitFromLocalStorage = (state: IRootStateAuth, action: IAction<IRootSt
   return {
     ...state,
     ...action.payload,
-    status: null,
+    requestStatus: null,
+    requestIsPending: false,
   };
 };
 
-const fillResolveLogin = (state: IRootStateAuth, action: IAction<IRootStateAuth>): IRootStateAuth => {
+const fetchLogin = (state: IRootStateAuth): IRootStateAuth => {
+  return {
+    ...state,
+    requestIsPending: true,
+  };
+};
+
+const fillResolveLogin = (state: IRootStateAuth, action: IAction<IFillResolveLoginActonPayload>): IRootStateAuth => {
   return {
     ...state,
     ...action.payload,
+    requestIsPending: false,
   };
 };
 
@@ -31,30 +42,32 @@ const fillRejectLogin = (state: IRootStateAuth, action: IAction<IFillRejectLogin
     ...state,
     token: null,
     userName: null,
-    status: action.payload.status,
+    requestStatus: action.payload.requestStatus,
+    requestIsPending: false,
   };
 };
 
-const fillLogout = (state: IRootStateAuth): IRootStateAuth => {
+const logout = (state: IRootStateAuth): IRootStateAuth => {
   return {
     ...state,
-    ...defaultStoreState.auth,
+    ...defaultRootStoreState.auth,
   };
 };
 
 const authResetStatus = (state: IRootStateAuth): IRootStateAuth => {
   return {
     ...state,
-    status: null,
+    requestStatus: null,
   };
 };
 
 export const authReducerBuilder = createReducer(
-  defaultStoreState.auth,
+  defaultRootStoreState.auth,
   on(authInitFromLocalStorageAction, authInitFromLocalStorage),
+  on(fetchLoginAction, fetchLogin),
   on(fillResolveLoginAction, fillResolveLogin),
   on(fillRejectLoginAction, fillRejectLogin),
-  on(fillLogoutAction, fillLogout),
+  on(logoutAction, logout),
   on(authResetStatusAction, authResetStatus),
 );
 

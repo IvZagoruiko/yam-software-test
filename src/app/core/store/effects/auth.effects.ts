@@ -5,9 +5,8 @@ import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthHttpService } from '../../auth/services/auth-http.service';
 import { ILoginResponse } from '../../auth/interfaces/login-response.interface';
-import { AUTH_ACTIONS, IFetchLoginActionPayload, IFillRejectLoginActionPayload } from '../actions/auth.action';
+import { AUTH_ACTIONS, IFetchLoginActionPayload, IFillRejectLoginActionPayload, IFillResolveLoginActonPayload } from '../actions/auth.action';
 import { IAction } from '../interfaces/action.interface';
-import { IRootStateAuth } from '../interfaces/root-state-auth.interface';
 
 @Injectable()
 export class AuthEffects {
@@ -15,22 +14,22 @@ export class AuthEffects {
     this._actions$
       .pipe(
         ofType(AUTH_ACTIONS.LOGIN.FETCH),
-        exhaustMap(({payload}: IAction<IFetchLoginActionPayload>): Observable<IAction<IRootStateAuth | IFillRejectLoginActionPayload>> => {
+        exhaustMap(({payload}: IAction<IFetchLoginActionPayload>): Observable<IAction<IFillResolveLoginActonPayload | IFillRejectLoginActionPayload>> => {
           return this._authHttpService.login(payload)
             .pipe(
-              map((response: ILoginResponse): IAction<IRootStateAuth> => ({
+              map((response: ILoginResponse): IAction<IFillResolveLoginActonPayload> => ({
                 type: AUTH_ACTIONS.LOGIN.FILL.RESOLVE,
                 payload: {
                   token: response.token,
                   userName: payload.username,
-                  status: 200,
+                  requestStatus: 200,
                 },
               })),
               catchError((error: HttpErrorResponse): Observable<IAction<IFillRejectLoginActionPayload>> => {
                 return of({
                   type: AUTH_ACTIONS.LOGIN.FILL.REJECT,
                   payload: {
-                    status: error.status,
+                    requestStatus: error.status,
                   },
                 });
               }),

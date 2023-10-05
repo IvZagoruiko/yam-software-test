@@ -2,16 +2,16 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Inject, Injectable } from '@angular/core';
 import { Observable, switchMap, take } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { HTTP_REQUEST_TIMEOUT } from '../../../app.tokens';
-import { selectAuthToken } from '../../store/selectors/auth.selector';
-import { IRootState } from '../../store/interfaces/root-state.interface';
+import { selectAuthToken } from '@store/selectors/auth.selector';
+import { IRootState } from '@store/interfaces/root-state.interface';
+import { HTTP_REQUEST_TIMEOUT_TOKEN } from '../../../app.tokens';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private readonly _store: Store<IRootState>,
-    @Inject(HTTP_REQUEST_TIMEOUT) private readonly _httpRequestTimeout: number,
+    @Inject(HTTP_REQUEST_TIMEOUT_TOKEN) private readonly _httpRequestTimeout: number,
   ) {
   }
 

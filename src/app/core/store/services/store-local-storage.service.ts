@@ -26,6 +26,7 @@ export class StoreLocalStorageService {
 
   private _getStateFromLocalStorage(): IRootState {
     const savedState = localStorage.getItem(this._localStorageKey);
+    localStorage.removeItem(this._localStorageKey);
     return savedState ? JSON.parse(savedState) : null;
   }
 

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from '@core/core.module';
 import { environment } from '../environments/environment';
-import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { BASE_BE_URL, HTTP_REQUEST_TIMEOUT } from './app.tokens';
+import { BASE_BE_URL_TOKEN, HTTP_REQUEST_TIMEOUT_TOKEN } from './app.tokens';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -20,8 +20,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
   ],
   providers: [
-    {provide: BASE_BE_URL, useValue: environment.baseBEUrl},
-    {provide: HTTP_REQUEST_TIMEOUT, useValue: environment.httpRequestTimeout},
+    {provide: BASE_BE_URL_TOKEN, useValue: environment.baseBEUrl},
+    {provide: HTTP_REQUEST_TIMEOUT_TOKEN, useValue: environment.httpRequestTimeout},
   ],
   bootstrap: [
     AppComponent,

@@ -3,10 +3,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AuthHttpService } from '../../auth/services/auth-http.service';
-import { ILoginResponse } from '../../auth/interfaces/login-response.interface';
-import { AUTH_ACTIONS, IFetchLoginActionPayload, IFillRejectLoginActionPayload, IFillResolveLoginActonPayload } from '../actions/auth.action';
-import { IAction } from '../interfaces/action.interface';
+import { AuthHttpService } from '@core/auth/services/auth-http.service';
+import { ILoginResponse } from '@core/auth/interfaces/login-response.interface';
+import { AUTH_ACTIONS, IFetchLoginActionPayload, IFillRejectLoginActionPayload, IFillResolveLoginActonPayload } from '@store/actions/auth.actions';
+import { IAction } from '@store/interfaces/action.interface';
 
 @Injectable()
 export class AuthEffects {

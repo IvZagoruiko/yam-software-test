@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpBackend, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { filter, Observable, timeout } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IFetchLoginActionPayload } from '@store/actions/auth.action';
+import { IFetchLoginActionPayload } from '@store/actions/auth.actions';
 import { BASE_BE_URL_TOKEN, HTTP_REQUEST_TIMEOUT_TOKEN } from '../../../app.tokens';
 import { ILoginResponse } from '../interfaces/login-response.interface';
 

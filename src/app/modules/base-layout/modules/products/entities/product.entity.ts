@@ -3,6 +3,10 @@ import { IProductItem } from '../interfaces/product-item.interface';
 export class ProductEntity {
   private _fields: IProductItem;
 
+  get id(): number {
+    return this._fields.id;
+  }
+
   get title(): string {
     return this._fields.title;
   }

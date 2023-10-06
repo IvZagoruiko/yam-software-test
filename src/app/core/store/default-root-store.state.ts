@@ -7,6 +7,9 @@ export const defaultRootStoreState: IRootState = {
     requestData: {
       status: null,
       isPending: false,
-    }
+    },
+  },
+  cart: {
+    products: [],
   },
 };

@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BaseDestroyClass } from '@core/classes/base-destroy.class';
 import { StoreLocalStorageService } from '@store/services/store-local-storage.service';
-import { selectAuthToken } from '@store/selectors/auth.selector';
+import { selectAuthToken } from '@store/selectors/auth.selectors';
 import { IRootState } from '@store/interfaces/root-state.interface';
 import { BASE_REDIRECT_URL, LOGIN_URL } from './app.contants';
 

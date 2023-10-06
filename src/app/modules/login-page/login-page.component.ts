@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BaseDestroyClass } from '@core/classes/base-destroy.class';
-import { authResetStatusAction, fetchLoginAction } from '@store/actions/auth.action';
-import { selectAuthRequestData } from '@store/selectors/auth.selector';
+import { authResetStatusAction, fetchLoginAction } from '@store/actions/auth.actions';
+import { selectAuthRequestData } from '@store/selectors/auth.selectors';
 import { IRootState } from '@store/interfaces/root-state.interface';
 import { IRootStateAuthRequestData } from '@store/interfaces/root-state-auth.interface';
 

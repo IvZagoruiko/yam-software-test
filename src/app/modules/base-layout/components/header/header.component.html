@@ -1,8 +1,11 @@
 <div class="h-16 px-4 py-2 shadow-lg flex items-center">
   <div class="ml-auto flex items-center">
-    <button mat-button class="flex items-center bg-green-600">
+    <button mat-button class="flex items-center bg-green-600" (click)="openCart()">
       <mat-icon class="text-gray-700">shopping_cart_outline</mat-icon>
-      <span class="ml-2 text-gray-700">Cart</span>
+      <span class="ml-2 text-gray-700">
+        <span>Cart </span>
+        <span *ngIf="!!(cartProductsCount$ | async)">({{ cartProductsCount$ | async }})</span>
+      </span>
     </button>
 
     <button mat-button class="ml-6 flex items-center" [matMenuTriggerFor]="userActions">

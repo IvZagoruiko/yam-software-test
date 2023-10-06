@@ -1,0 +1,60 @@
+<div mat-dialog-title class="text-center">Cart Detail</div>
+
+<div mat-dialog-content>
+  <mat-table *ngIf="!!(products$ | async).length; else hasNotProducts" [dataSource]="products$">
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef class="max-w-1/12">Image</mat-header-cell>
+      <mat-cell *matCellDef="let product" class="max-w-1/12">
+        <div class="w-10 h-10 bg-contain bg-no-repeat bg-center" [ngStyle]="getBackgroundImageStyleByProduct(product)"></div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+      <mat-cell *matCellDef="let product" class="mr-4">{{ product.title }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef class="max-w-1/6">Price</mat-header-cell>
+      <mat-cell *matCellDef="let product" class="max-w-1/6">
+        <span>{{ product.price | number }}$</span>
+        <span *ngIf="product.count > 1" class="ml-1.5">({{ product.price * product.count | number }}$)</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="count">
+      <mat-header-cell *matHeaderCellDef class="max-w-1/12">Count</mat-header-cell>
+      <mat-cell *matCellDef="let product" class="max-w-1/12">{{ product.count }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef class="max-w-1/10"></mat-header-cell>
+      <mat-cell *matCellDef="let product" class="max-w-1/10">
+        <button mat-icon-button class="mr-2" (click)="addProduct(product)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button class="ml-auto" (click)="removeProduct(product)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+  </mat-table>
+
+  <ng-template #hasNotProducts>
+    <div class="my-20 text-lg font-medium text-center">Cart is Empty</div>
+  </ng-template>
+</div>
+
+<div mat-dialog-actions>
+  <div class="w-full flex justify-between items-center">
+    <button mat-stroked-button color="warn" [matDialogClose]="null">Close</button>
+
+    <div *ngIf="!!(products$ | async).length" class="ml-2">
+      <button mat-stroked-button color="primary" (click)="resetCart()">Reset Cart</button>
+      <button mat-stroked-button cdkFocusInitial class="ml-2 bg-green-600" (click)="buyProducts()">Buy ({{ totalPrice$ | async | number }}$)</button>
+    </div>
+  </div>
+</div>

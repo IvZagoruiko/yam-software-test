@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { IRootState } from '../interfaces/root-state.interface';
-import { IRootStateAuth, IRootStateAuthRequestData } from '../interfaces/root-state-auth.interface';
+import { IRootState } from '@store/interfaces/root-state.interface';
+import { IRootStateAuth, IRootStateAuthRequestData } from '@store/interfaces/root-state-auth.interface';
 
 const selectAuth = (state: IRootState): IRootStateAuth => state.auth;
 

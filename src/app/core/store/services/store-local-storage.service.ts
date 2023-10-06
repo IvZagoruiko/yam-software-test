@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { authInitFromLocalStorageAction } from '../actions/auth.action';
-import { IRootState } from '../interfaces/root-state.interface';
+import { authInitFromLocalStorageAction } from '@store/actions/auth.actions';
+import { cartInitFromLocalStorageAction } from '@store/actions/cart.actions';
+import { IRootState } from '@store/interfaces/root-state.interface';
 
 @Injectable()
 export class StoreLocalStorageService {
@@ -39,6 +40,11 @@ export class StoreLocalStorageService {
     if (!!savedData.auth) {
       const payload = savedData.auth;
       this._store.dispatch(authInitFromLocalStorageAction({payload}));
+    }
+
+    if (!!savedData.cart) {
+      const payload = savedData.cart;
+      this._store.dispatch(cartInitFromLocalStorageAction({payload}));
     }
   }
 }

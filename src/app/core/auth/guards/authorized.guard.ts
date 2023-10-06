@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { selectAuthToken } from '@store/selectors/auth.selector';
+import { selectAuthToken } from '@store/selectors/auth.selectors';
 import { IRootState } from '@store/interfaces/root-state.interface';
 
 @Injectable()

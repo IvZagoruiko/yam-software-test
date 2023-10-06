@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Inject, Injectable } from '@angular/core';
 import { Observable, switchMap, take } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectAuthToken } from '@store/selectors/auth.selector';
+import { selectAuthToken } from '@store/selectors/auth.selectors';
 import { IRootState } from '@store/interfaces/root-state.interface';
 import { HTTP_REQUEST_TIMEOUT_TOKEN } from '../../../app.tokens';
 

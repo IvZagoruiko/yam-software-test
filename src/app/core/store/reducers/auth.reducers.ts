@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { defaultRootStoreState } from '../default-root-store.state';
+import { defaultRootStoreState } from '@store/default-root-store.state';
 import {
   authInitFromLocalStorageAction,
   authResetStatusAction,
@@ -9,9 +9,10 @@ import {
   IFillRejectLoginActionPayload,
   IFillResolveLoginActonPayload,
   logoutAction,
-} from '../actions/auth.action';
-import { IAction } from '../interfaces/action.interface';
-import { IRootStateAuth } from '../interfaces/root-state-auth.interface';
+} from '@store/actions/auth.actions';
+import { IAction } from '@store/interfaces/action.interface';
+import { IRootStateAuth } from '@store/interfaces/root-state-auth.interface';
+
 
 const authInitFromLocalStorage = (state: IRootStateAuth, action: IAction<IRootStateAuth>): IRootStateAuth => {
   return {
@@ -70,12 +71,12 @@ const authResetStatus = (state: IRootStateAuth): IRootStateAuth => {
     ...state,
     requestData: {
       ...state.requestData,
-      status: null,
+      status: defaultRootStoreState.auth.requestData.status,
     },
   };
 };
 
-export const authReducerBuilder = createReducer(
+const authReducerBuilder = createReducer(
   defaultRootStoreState.auth,
   on(authInitFromLocalStorageAction, authInitFromLocalStorage),
   on(fetchLoginAction, fetchLogin),
@@ -85,6 +86,6 @@ export const authReducerBuilder = createReducer(
   on(authResetStatusAction, authResetStatus),
 );
 
-export function authReducer(state: IRootStateAuth, action: IAction): IRootStateAuth {
+export function authReducers(state: IRootStateAuth, action: IAction): IRootStateAuth {
   return authReducerBuilder(state, action);
 }
